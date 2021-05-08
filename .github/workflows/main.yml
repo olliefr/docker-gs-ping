@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
-          tags: docker-gs-ping:test, ${{ github.repository }}:test
+          tags: ${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest
 
-      - name: Test
+      - name: Run functional tests
         run:  go test -v ./...
