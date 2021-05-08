@@ -19,10 +19,15 @@ jobs:
 
       - name: Fetch required Go modules
         run:  go mod download
-      
+
       - name: Build
         run:  go build -v ./...
-      
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: false
+          tags: ${{ env.GITHUB_REPOSITORY }}:latest
+
       - name: Test
         run:  go test -v ./...
-      
