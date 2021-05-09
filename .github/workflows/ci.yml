@@ -1,4 +1,4 @@
-name: CI/CD to Docker Hub
+name: Run CI
 
 on:
   push:
