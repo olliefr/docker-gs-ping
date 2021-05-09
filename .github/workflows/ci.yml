@@ -40,6 +40,7 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           push:    false
+          load:    true
           tags: ${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to:   type=local,dest=/tmp/.buildx-cache
