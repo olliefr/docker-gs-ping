@@ -27,7 +27,7 @@ jobs:
       - name: Login to ECR
         uses: docker/login-action@v2
         with:
-          registry: 050046987178.dkr.ecr.us-east-1.amazonaws.com/terraform-cloud-backup
+          registry: 050046987178.dkr.ecr.us-east-1.amazonaws.com
           username: ${{ secrets.AWS_ACCESS_KEY_ID }}
           password: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
@@ -52,8 +52,8 @@ jobs:
           context: go-tool
           push: true
           tags: |
-            050046987178.dkr.ecr.us-east-1.amazonaws.com/terraform-cloud-backup/tfc-go-backup:latest
-            050046987178.dkr.ecr.us-east-1.amazonaws.com/terraform-cloud-backup/tfc-go-backup:1.0.0
+            050046987178.dkr.ecr.us-east-1.amazonaws.com/terraform-cloud-backup:latest
+            050046987178.dkr.ecr.us-east-1.amazonaws.com/terraform-cloud-backup:1.0.0
 #          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}:latest
 
       - name: Image digest
