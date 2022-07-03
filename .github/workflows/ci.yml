@@ -42,6 +42,7 @@ jobs:
       - name: Build Docker image
         uses: docker/build-push-action@v2
         with:
+          context: go-tool
           builder: ${{ steps.buildx.outputs.name }}
           push:    false
           load:    true
