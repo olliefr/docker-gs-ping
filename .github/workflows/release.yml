@@ -1,9 +1,12 @@
 name: Release to Docker Hub
 
 on:
+  workflow_dispatch:
   push:
-    tags:
-      - "*.*.*"
+    branches:
+      - main
+    paths:
+      - go-tool/**
 
 jobs:
   release:
