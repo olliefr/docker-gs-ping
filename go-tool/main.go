@@ -27,6 +27,10 @@ func main() {
 		return c.JSON(http.StatusOK, struct{ Status string }{Status: "PONG"})
 	})
 
+	e.GET("/hello", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, struct{ Status string }{Status: "hello"})
+	})
+
 	httpPort := os.Getenv("HTTP_PORT")
 	if httpPort == "" {
 		httpPort = "8080"
