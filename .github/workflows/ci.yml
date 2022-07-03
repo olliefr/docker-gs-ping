@@ -5,6 +5,10 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: go-tool
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
@@ -29,7 +33,7 @@ jobs:
 
       - name: Cache Docker layers
         uses: actions/cache@v2
-        with: 
+        with:
           path: /tmp/.buildx-cache
           key:  ${{ runner.os }}-buildx-${{ github.sha }}
           restore-keys: |

@@ -8,6 +8,10 @@ on:
     paths:
       - go-tool/**
 
+defaults:
+  run:
+    working-directory: go-tool
+
 jobs:
   release:
     runs-on: ubuntu-latest
