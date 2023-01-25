@@ -13,6 +13,46 @@ Planned:
 
 * Building Go modules and Docker images with `goreleaser`
 
+## Running the tests
+
+1. Using dockertest:
+```shell
+go test ./... -count=1 -tags=dockertest -v    
+=== RUN   TestRespondsWithLove
+    main_test.go:50: container not ready, waiting...
+--- PASS: TestRespondsWithLove (0.90s)
+=== RUN   TestHealthCheck
+    main_test.go:86: container not ready, waiting...
+--- PASS: TestHealthCheck (0.86s)
+PASS
+ok  	github.com/olliefr/docker-gs-ping	1.947s
+```
+
+2. Using Testcontainers for Go:
+```shell
+go test ./... -count=1 -tags=testcontainers -v
+=== RUN   TestRespondsWithLoveTestcontainers
+2023/01/25 13:16:16 github.com/testcontainers/testcontainers-go - Connected to docker: 
+  Server Version: 20.10.21
+  API Version: 1.41
+  Operating System: Docker Desktop
+  Total Memory: 7851 MB
+2023/01/25 13:16:16 Starting container id: b074ee900ace image: docker.io/testcontainers/ryuk:0.3.4
+2023/01/25 13:16:16 Waiting for container id b074ee900ace image: docker.io/testcontainers/ryuk:0.3.4
+2023/01/25 13:16:16 Container is ready id: b074ee900ace image: docker.io/testcontainers/ryuk:0.3.4
+2023/01/25 13:16:16 Starting container id: 894bb575f712 image: docker.io/olliefr/docker-gs-ping:latest
+2023/01/25 13:16:16 Waiting for container id 894bb575f712 image: docker.io/olliefr/docker-gs-ping:latest
+2023/01/25 13:16:17 Container is ready id: 894bb575f712 image: docker.io/olliefr/docker-gs-ping:latest
+--- PASS: TestRespondsWithLoveTestcontainers (1.03s)
+=== RUN   TestHealthCheckTestcontainers
+2023/01/25 13:16:17 Starting container id: 2da2fa2876c6 image: docker.io/olliefr/docker-gs-ping:latest
+2023/01/25 13:16:17 Waiting for container id 2da2fa2876c6 image: docker.io/olliefr/docker-gs-ping:latest
+2023/01/25 13:16:17 Container is ready id: 2da2fa2876c6 image: docker.io/olliefr/docker-gs-ping:latest
+--- PASS: TestHealthCheckTestcontainers (0.42s)
+PASS
+ok  	github.com/olliefr/docker-gs-ping	1.753s
+```
+
 ## Want _moar_?!
 
 There is a more advanced example in [olliefr/docker-gs-ping-roach](https://github.com/olliefr/docker-gs-ping-roach) using [CockroachDB](https://github.com/cockroachdb/cockroach).

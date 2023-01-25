@@ -1,3 +1,6 @@
+//go:build dockertest
+// +build dockertest
+
 package main
 
 import (
