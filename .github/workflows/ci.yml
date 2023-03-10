@@ -12,7 +12,7 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@v2
         with:
-          go-version: 1.16.4
+          go-version: 1.19.7
 
       - name: Checkout code
         uses: actions/checkout@v2
@@ -45,5 +45,5 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to:   type=local,dest=/tmp/.buildx-cache
 
-      - name: Run functional tests
+      - name: Run the tests
         run:  go test -v ./...
