@@ -1,4 +1,4 @@
-name: Release to Docker Hub
+name: Release to Docker Hub (CD)
 
 on:
   push:
