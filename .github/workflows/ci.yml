@@ -31,6 +31,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           builder: ${{ steps.buildx.outputs.name }}
+          file: Dockerfile.multistage
           push:    false
           load:    true
           tags: ${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest
