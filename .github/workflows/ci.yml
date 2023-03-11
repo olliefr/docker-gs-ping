@@ -34,5 +34,6 @@ jobs:
           push:    false
           load:    true
           tags: ${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest
+          target: run-test-stage
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to:   type=local,dest=/tmp/.buildx-cache
