@@ -51,28 +51,21 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to:   type=local,dest=/tmp/.buildx-cache
 
-      - name: Build the release Docker image
-        uses: docker/build-push-action@v4
-        with:
-          load: true
-          file: Dockerfile.multistage
-          target: build-release-stage
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to:   type=local,dest=/tmp/.buildx-cache
-
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         if: github.event_name != 'pull_request'
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      
-      - name: Push Docker image
+
+      - name: Push release to Docker Hub
         uses: docker/build-push-action@v4
         if: github.event_name != 'pull_request'
         with:
           push: true
+          file: Dockerfile.multistage
+          target: build-release-stage
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to:   type=local,dest=/tmp/.buildx-cache
