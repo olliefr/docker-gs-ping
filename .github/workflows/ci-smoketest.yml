@@ -1,9 +1,9 @@
-name: Test in a GitHub Runner (CI)
+name: Run a smoke test (CI)
 
+# The smoke test runs on *any* push to the repo and can also be triggered manually.
+# It does a simple build and test using Go toolchain directly in the GitHub runner.
 on:
   push:
-    branches-ignore: 
-      - main
   workflow_dispatch:
 
 jobs:
@@ -26,5 +26,5 @@ jobs:
       - name: Build
         run:  go build -v ./...
 
-      - name: Run the tests
+      - name: Test
         run:  go test -v ./...
