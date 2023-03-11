@@ -4,17 +4,16 @@
 ## Build the application from source
 ##
 
-FROM golang:1.19-buster AS build-stage
+FROM golang:1.19 AS build-stage
 
 WORKDIR /app
 
-COPY go.mod .
-COPY go.sum .
+COPY go.mod go.sum ./
 RUN go mod download
 
 COPY *.go ./
 
-RUN go build -o /docker-gs-ping
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
 
 ##
 ## Run the tests in the container
@@ -27,7 +26,7 @@ RUN go test -v ./...
 ## Deploy the application binary into a lean image
 ##
 
-FROM gcr.io/distroless/base-debian10 AS build-release-stage
+FROM gcr.io/distroless/base-debian11 AS build-release-stage
 
 WORKDIR /
 
