@@ -1,27 +1,17 @@
-name: Run tests (CI)
+name: Test in a Docker container (CI)
 
 on:
   push:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.19.7
-
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Fetch required Go modules
-        run:  go mod download
-
-      - name: Build
-        run:  go build -v ./...
+        with:
+          persist-credentials: false
 
       - name: Set up Docker Buildx
         id:   buildx
@@ -35,6 +25,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+      # TODO set-up multi-stage build for testing...
+
       - name: Build Docker image
         uses: docker/build-push-action@v4
         with:
@@ -44,6 +36,3 @@ jobs:
           tags: ${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to:   type=local,dest=/tmp/.buildx-cache
-
-      - name: Run the tests
-        run:  go test -v ./...
