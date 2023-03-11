@@ -25,7 +25,6 @@ jobs:
         with:
           images: |
             ${{ secrets.DOCKER_HUB_USERNAME }}/${{ github.event.repository.name }}
-            ${{ github.event.repository.name }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
