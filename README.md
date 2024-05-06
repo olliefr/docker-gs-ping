@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This repo is out-of-date and archived. The development continues at [docker/docker-gs-ping](https://github.com/docker/docker-gs-ping).
+
 # docker-gs-ping
 
 A simple Go server/microservice example for [Docker's Go Language Guide](https://docs.docker.com/language/golang/).
